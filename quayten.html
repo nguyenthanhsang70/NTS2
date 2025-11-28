@@ -273,7 +273,7 @@
         <h2>随机名称轮盘</h2>
         
         <div class="input-wrapper">
-            <textarea id="nameList" placeholder=">> NHẬP DỮ LIỆU ỨNG VIÊN...&#10;>> ENTER ĐỂ XUỐNG DÒNG"></textarea>
+            <textarea id="nameList" placeholder=">> 输入候选人资料…&#10;>> 按回车键换行"></textarea>
         </div>
 
         <div class="result-box">
@@ -282,10 +282,10 @@
 
         <div class="btn-group">
             <button id="refreshButton" onclick="refreshList()">
-                <i class="fas fa-trash"></i> Xóa
+                <i class="fas fa-trash"></i> 删除
             </button>
             <button id="spinButton" onclick="startSpin()">
-                <i class="fas fa-play"></i> Bắt Đầu Quay
+                <i class="fas fa-play"></i> 开始转动
             </button>
         </div>
 
@@ -325,9 +325,9 @@
 
         function startSpin() {
             const input = document.getElementById("nameList").value.trim();
-            if (!input) { alert("⚠️ CẢNH BÁO: Dữ liệu trống!"); return; }
+            if (!input) { alert("⚠️ 警告：数据为空！"); return; }
             const names = input.split("\n").filter(name => name.trim() !== "");
-            if (names.length < 2) { alert("⚠️ CẢNH BÁO: Cần ít nhất 2 tên!"); return; }
+            if (names.length < 2) { alert("⚠️ 警告：至少需要两个名字！"); return; }
             if (isSpinning) return;
 
             isSpinning = true;
@@ -335,7 +335,7 @@
             const resultEl = document.getElementById("result");
             
             spinBtn.disabled = true;
-            spinBtn.innerHTML = 'Đang Quay...';
+            spinBtn.innerHTML = '正在转动……';
             
             // Reset hiệu ứng
             resultEl.classList.remove("winner");
@@ -434,5 +434,6 @@
     </script>
 </body>
 </html>
+
 
 
