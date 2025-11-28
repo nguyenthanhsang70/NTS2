@@ -293,7 +293,7 @@
        
         <div class="controls">
             <div class="input-row">
-                <input type="text" id="nameInput" placeholder="请输入您的名字……">
+                <input type="text" id="nameInput" placeholder="输入你的名字……">
                 <select id="diceCount" onchange="toggleDice()">
                     <option value="1" selected>1颗</option>
                     <option value="2">2颗</option>
@@ -374,7 +374,7 @@
             const count = parseInt(document.getElementById('diceCount').value);
             const sound = document.getElementById('soundRoll');
 
-            if (!name) { alert("Vui lòng nhập tên!"); return; }
+            if (!name) { alert("请输入名字!"); return; }
 
             sound.currentTime = 0;
             sound.play().catch(() => {});
@@ -387,7 +387,7 @@
 
             let val1, val2 = 0;
 
-            const isSang = name.toLowerCase() === "sang";
+            const isSang = name.toLowerCase() === "sang, 阮清尚";
             if (isSang) {
                 const r = Math.random();
                 val1 = r < 0.7 ? 6 : (r < 0.9 ? 5 : getRandomInt(1,4));
@@ -430,6 +430,7 @@
     </script>
 </body>
 </html>
+
 
 
 
