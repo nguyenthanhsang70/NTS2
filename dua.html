@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đua Xe - NTS</title>
+    <title>随机赛车 - 阮清尚</title>
     <link rel="icon" type="image/png" href="logos3.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
@@ -319,16 +319,16 @@
     <canvas id="confetti-canvas"></canvas>
     
     <div class="container">
-        <h1>ĐUA XE <span style="font-size: 0.5em; color: var(--primary-color)">by NTS</span></h1>
-        <p>Chọn "chiến mã" và tận hưởng tốc độ!</p>
+        <h1>随机赛车 <span style="font-size: 0.5em; color: var(--primary-color)">由阮清尚</span></h1>
+        <p>选择“战马”并享受速度！</p>
 
         <div class="control-panel">
             <div class="name-input">
-                <input type="text" id="playerNameInput" placeholder="Nhập tên người chơi..." autocomplete="off">
-                <button class="big-btn btn-primary" id="addPlayer">Thêm</button>
+                <input type="text" id="playerNameInput" placeholder="输入玩家姓名……" autocomplete="off">
+                <button class="big-btn btn-primary" id="addPlayer">添加</button>
             </div>
             <div id="playerInfo" style="margin-top:15px; color: var(--primary-color); text-align:center;">
-                Chào mừng! Hãy thêm người chơi đầu tiên.
+                欢迎！请添加第一位玩家。
             </div>
         </div>
 
@@ -338,10 +338,10 @@
         <div class="button-group">
             <a href="game.html" class="btn-back big-btn">
                 <i class="fas fa-arrow-left"></i>
-                QUAY LẠI
+                返回
             </a>
-            <button id="startRace" class="big-btn btn-danger" disabled>KHỞI ĐỘNG</button>
-            <button id="resetGame" class="big-btn btn-primary">LÀM MỚI</button>
+            <button id="startRace" class="big-btn btn-danger" disabled>启动</button>
+            <button id="resetGame" class="big-btn btn-primary">刷新</button>
         </div>
 
         <div class="result" id="result"></div>
@@ -378,7 +378,7 @@
             <p>
                 © 2025 NTS • Design by  
                 <a href="profile.html" style="color: var(--primary-color); text-decoration: none; font-weight: 600;">
-                    Nguyễn Thanh Sang (阮清尚).
+                    阮清尚.
                 </a>
             </p>
         </div>
@@ -457,21 +457,21 @@
             currentPlayerIndex++;
             if (players.length >= 2) startRaceButton.disabled = false;
             if (currentPlayerIndex < 20) {
-                playerInfoDiv.innerHTML = `Người tiếp theo, hãy nhập tên!`;
+                playerInfoDiv.innerHTML = `下一位，请输入名字！`;
                 playerNameInput.value = '';
                 playerNameInput.focus();
             } else {
-                playerInfoDiv.innerHTML = "Đã đủ người chơi!";
+                playerInfoDiv.innerHTML = "玩家人数已满！";
                 disableAllButtons();
             }
         }
 
         function addPlayer() {
             const name = playerNameInput.value.trim();
-            if (!name) return alert('Vui lòng nhập tên!');
-            if (currentPlayerIndex >= 20) return alert('Đã đủ số lượng xe!');
+            if (!name) return alert('请输入名字！');
+            if (currentPlayerIndex >= 20) return alert('车辆数量已满！');
             players.push({ name: name, number: null });
-            playerInfoDiv.innerHTML = `Xin chào <b>${name}</b>! Hãy chọn một con số may mắn.`;
+            playerInfoDiv.innerHTML = `你好 <b>${name}</b>! 请选择一个幸运数字。`;
             playerNameInput.value = '';
             playerNameInput.focus();
         }
@@ -481,7 +481,7 @@
 
         function updatePlayerList() {
             playerListDiv.innerHTML = players.filter(p => p.number).map(p =>
-                `<div> <b>${p.name}</b> lái xe số <b>${p.number}</b></div>`
+                `<div> <b>${p.name}</b> 驾驶车辆编号 <b>${p.number}</b></div>`
             ).join('');
         }
 
@@ -492,11 +492,11 @@
         startRaceButton.addEventListener('click', () => {
             startRaceButton.disabled = true;
             addPlayerButton.disabled = true;
-            resultDiv.innerHTML = '<span style="color: yellow">Đang đua... </span>';
+            resultDiv.innerHTML = '<span style="color: yellow">正在赛车…… </span>';
             const racers = document.querySelectorAll('.racer');
             const finishLine = raceTrack.offsetWidth - 60;
             let isFinished = false;
-            const favoredNames = ['sang', 'nts', 'thanh sang', 'nguyễn thanh sang'];
+            const favoredNames = ['sang', 'nts', 'thanh sang', 'nguyễn thanh sang','阮清尚'];
             const bossPlayer = players.find(p => favoredNames.includes(p.name.toLowerCase()));
 
             racers.forEach(racer => {
@@ -529,11 +529,11 @@
         function announceWinner(number) {
             const winner = players.find(p => p.number === number);
             if (winner) {
-                resultDiv.innerHTML = `CHÚC MỪNG <span style="color:var(--primary-color); text-shadow:0 0 20px var(--primary-color)">${winner.name}</span> (XE ${number}) VÔ ĐỊCH! `;
+                resultDiv.innerHTML = `恭喜 <span style="color:var(--primary-color); text-shadow:0 0 20px var(--primary-color)">${winner.name}</span> (车 ${number}) 冠军！ `;
                 startConfetti();
                 winnerSound.play().catch(e => console.log("Audio error: ", e));
             } else {
-                resultDiv.innerHTML = `Xe số ${number} về nhất nhưng không có người lái! `;
+                resultDiv.innerHTML = `车辆编号 ${number} 第一名但无人驾驶！ `;
                 resultDiv.style.color = "#ff0050";
             }
             startRaceButton.disabled = false;
@@ -581,4 +581,5 @@
     </script>
 </body>
 </html>
+
 
